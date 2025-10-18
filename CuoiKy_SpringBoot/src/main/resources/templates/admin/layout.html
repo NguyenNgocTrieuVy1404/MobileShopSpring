@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title layout:fragment="title">Admin Dashboard</title>
+
+  <!-- Custom fonts for this template-->
+  <link th:href="@{/admin/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link th:href="@{/admin/css/sb-admin-2.min.css}" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+  
+  <!-- Custom CSS -->
+  <link th:href="@{/admin/css/admin.css}" rel="stylesheet">
+  
+  <!-- Additional CSS -->
+  <th:block layout:fragment="additional-css"></th:block>
+</head>
+
+<body id="page-top">
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" th:href="@{/admin}">
+        <div class="sidebar-brand-icon">
+          <i class="fas fa-store"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Shop Admin</div>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/admin}">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Tổng quan</span>
+        </a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Quản lý
+      </div>
+
+      <!-- Nav Item - Quản lý Sản phẩm -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducts"
+          aria-expanded="true" aria-controls="collapseProducts">
+          <i class="fas fa-fw fa-box"></i>
+          <span>Quản lý Sản phẩm</span>
+        </a>
+        <div id="collapseProducts" class="collapse" aria-labelledby="headingProducts" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Chức năng:</h6>
+            <a class="collapse-item" th:href="@{/admin/products/list}">
+              <i class="fas fa-list fa-sm fa-fw mr-2"></i>Danh sách sản phẩm
+            </a>
+            <a class="collapse-item" th:href="@{/admin/products/showFormForAdd}">
+              <i class="fas fa-plus fa-sm fa-fw mr-2"></i>Thêm sản phẩm
+            </a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Nav Item - Quản lý Đơn hàng -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOrders"
+          aria-expanded="true" aria-controls="collapseOrders">
+          <i class="fas fa-fw fa-shopping-cart"></i>
+          <span>Quản lý Đơn hàng</span>
+        </a>
+        <div id="collapseOrders" class="collapse" aria-labelledby="headingOrders" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Trạng thái đơn hàng:</h6>
+            <a class="collapse-item" th:href="@{/access-denied}">Tất cả đơn hàng</a>
+            <a class="collapse-item" th:href="@{/access-denied}">Đơn chờ xử lý</a>
+            <a class="collapse-item" th:href="@{/access-denied}">Đơn đang giao</a>
+            <a class="collapse-item" th:href="@{/access-denied}">Đơn hoàn thành</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Nav Item - Quản lý Người dùng -->
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/admin/users/list}">
+          <i class="fas fa-fw fa-users"></i>
+          <span>Quản lý Người dùng</span>
+        </a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Báo cáo
+      </div>
+
+      <!-- Nav Item - Thống kê -->
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/access-denied}">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Thống kê doanh thu</span>
+        </a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <!-- Main Content -->
+      <div id="content">
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+          <!-- Sidebar Toggle (Topbar) -->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav ml-auto">
+            <!-- Nav Item - View Shop -->
+            <li class="nav-item no-arrow mx-1">
+              <a class="nav-link view-shop-btn" th:href="@{/shop}" target="_blank">
+                <i class="fas fa-store fa-fw"></i>
+                <span>Xem Shop</span>
+              </a>
+            </li>
+
+            <div class="topbar-divider d-none d-sm-block"></div>
+
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle user-info" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="user-name">
+                  <span sec:authentication="name"></span>
+                  <span class="badge bg-primary">ADMIN</span>
+                </span>
+                <i class="fas fa-user-circle"></i>
+              </a>
+              <!-- Dropdown - User Information -->
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" th:href="@{/user/profile}">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Thông tin cá nhân
+                </a>
+                <div class="dropdown-divider"></div>
+                <form th:action="@{/logout}" method="post">
+                  <button type="submit" class="dropdown-item">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>
+                    Đăng xuất
+                  </button>
+                </form>
+              </div>
+            </li>
+          </ul>
+        </nav>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+          <div layout:fragment="main-content"></div>
+        </div>
+        <!-- /.container-fluid -->
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Shop Online 2024</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+    </div>
+    <!-- End of Content Wrapper -->
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Bootstrap core JavaScript-->
+  <script th:src="@{/admin/vendor/jquery/jquery.min.js}"></script>
+  <script th:src="@{/admin/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script th:src="@{/admin/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script th:src="@{/admin/js/sb-admin-2.min.js}"></script>
+
+  <!-- Page level plugins -->
+  <script th:src="@{/admin/vendor/chart.js/Chart.min.js}"></script>
+
+  <!-- Page level custom scripts -->
+  <script th:src="@{/admin/js/demo/chart-area-demo.js}"></script>
+  <script th:src="@{/admin/js/demo/chart-pie-demo.js}"></script>
+  <script th:src="@{/admin/js/user-form.js}"></script>
+</body>
+</html>

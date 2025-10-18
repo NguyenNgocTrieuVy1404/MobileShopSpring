@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{shop/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Trang Quản Lý</title>
+</head>
+<body>
+    <div layout:fragment="main-content">
+        <div class="main-container">
+            <div class="container">
+                <div class="welcome-section">
+                    <div class="row align-items-center">
+                        <div class="col-12 text-center">
+                            <h2 class="mb-3">
+                                Xin chào, 
+                                <span sec:authentication="name" class="text-primary fw-bold"></span>
+                                <span class="badge bg-info role-badge" sec:authentication="principal.authorities"></span>
+                            </h2>
+                            <p class="text-muted mb-0 fs-5">Chào mừng bạn quay trở lại với hệ thống quản lý Shop Online</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Phần dành cho Customer -->
+                    <div class="col-md-6">
+                        <div class="card feature-card">
+                            <div class="card-body text-center">
+                                <div class="card-content">
+                                    <i class="bi bi-shop feature-icon"></i>
+                                    <h4 class="card-title mb-3">Khu vực Mua sắm</h4>
+                                    <p class="card-text fs-5 text-muted">Khám phá và mua sắm các sản phẩm công nghệ chất lượng cao của chúng tôi</p>
+                                </div>
+                                <div class="btn-container">
+                                    <a href="/shop" class="btn btn-primary action-btn w-75">
+                                        <i class="bi bi-cart me-2"></i> Đi đến Cửa hàng
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Phần dành cho Admin -->
+                    <div class="col-md-6" sec:authorize="hasRole('ADMIN')">
+                        <div class="card feature-card">
+                            <div class="card-body text-center">
+                                <div class="card-content">
+                                    <i class="bi bi-gear feature-icon admin-icon"></i>
+                                    <h4 class="card-title mb-3">Khu vực Quản trị</h4>
+                                    <p class="card-text fs-5 text-muted">Quản lý và theo dõi hoạt động của cửa hàng</p>
+                                </div>
+                                <div class="btn-container">
+                                    <a href="/admin" class="btn btn-warning action-btn w-75">
+                                        <i class="bi bi-box me-2"></i> Quản trị hệ thống
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{shop/layout}">
+<head>
+    <title>Thanh toán - Shop Online</title>
+</head>
+<body>
+    <div layout:fragment="main-content">
+        <div class="checkout-container">
+            <div class="container">
+                <div class="checkout-header text-center mb-5">
+                    <h2 class="fw-bold mb-2">Thanh toán đơn hàng</h2>
+                    <p class="text-muted">Vui lòng điền thông tin để hoàn tất đặt hàng</p>
+                </div>
+
+                <!-- Hiển thị thông báo lỗi chung nếu có -->
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('order.*')}">
+                    <p><strong>Vui lòng kiểm tra lại thông tin!</strong></p>
+                    <ul>
+                        <li th:each="err : ${#fields.errors('order.*')}" th:text="${err}"></li>
+                    </ul>
+                </div>
+
+                <form th:action="@{/shop/checkout/process}" method="POST" id="checkoutForm" th:object="${order}" novalidate>
+                    <div class="row">
+                        <!-- Thông tin người nhận -->
+                        <div class="col-lg-7">
+                            <div class="checkout-card mb-4">
+                                <div class="card-body p-4">
+                                    <h3 class="checkout-title">Thông tin giao hàng</h3>
+                                    
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label for="customerName" class="form-label">Họ tên người nhận</label>
+                                            <input type="text" class="form-control" id="customerName" th:field="*{customerName}" 
+                                                   th:classappend="${#fields.hasErrors('customerName')} ? 'is-invalid'">
+                                            <div class="invalid-feedback" th:if="${#fields.hasErrors('customerName')}" 
+                                                 th:errors="*{customerName}">Tên không hợp lệ</div>
+                                        </div>
+                                        
+                                        <div class="col-12">
+                                            <label for="customerEmail" class="form-label">Email</label>
+                                            <input type="email" class="form-control" id="customerEmail" th:field="*{customerEmail}" 
+                                                   th:classappend="${#fields.hasErrors('customerEmail')} ? 'is-invalid'">
+                                            <div class="invalid-feedback" th:if="${#fields.hasErrors('customerEmail')}" 
+                                                 th:errors="*{customerEmail}">Email không hợp lệ</div>
+                                        </div>
+                                        
+                                        <div class="col-12">
+                                            <label for="phoneNumber" class="form-label">Số điện thoại</label>
+                                            <input type="tel" class="form-control" id="phoneNumber" th:field="*{phoneNumber}" 
+                                                   th:classappend="${#fields.hasErrors('phoneNumber')} ? 'is-invalid'"
+                                                   placeholder="Nhập số điện thoại (VD: 0912345678)">
+                                            <div class="invalid-feedback" th:if="${#fields.hasErrors('phoneNumber')}" 
+                                                 th:errors="*{phoneNumber}">Số điện thoại không hợp lệ</div>
+                                        </div>
+                                        
+                                        <div class="col-12">
+                                            <label for="shippingAddress" class="form-label">Địa chỉ giao hàng</label>
+                                            <textarea class="form-control" id="shippingAddress" th:field="*{shippingAddress}" 
+                                                      th:classappend="${#fields.hasErrors('shippingAddress')} ? 'is-invalid'"
+                                                      rows="3"></textarea>
+                                            <div class="invalid-feedback" th:if="${#fields.hasErrors('shippingAddress')}" 
+                                                 th:errors="*{shippingAddress}">Địa chỉ không hợp lệ</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="checkout-card mb-4">
+                                <div class="card-body p-4">
+                                    <h3 class="checkout-title">Phương thức thanh toán</h3>
+                                    
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="radio" name="paymentMethod" id="cod" 
+                                               value="COD" checked>
+                                        <label class="form-check-label" for="cod">
+                                            <i class="bi bi-cash-coin me-2"></i>Thanh toán khi nhận hàng (COD)
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="form-check mb-3 disabled">
+                                        <input class="form-check-input" type="radio" name="paymentMethod" id="credit" 
+                                               value="CREDIT" disabled>
+                                        <label class="form-check-label text-muted" for="credit">
+                                            <i class="bi bi-credit-card me-2"></i>Thẻ tín dụng/Ghi nợ (Sắp có)
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="form-check disabled">
+                                        <input class="form-check-input" type="radio" name="paymentMethod" id="banking" 
+                                               value="BANKING" disabled>
+                                        <label class="form-check-label text-muted" for="banking">
+                                            <i class="bi bi-bank me-2"></i>Chuyển khoản ngân hàng (Sắp có)
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tóm tắt đơn hàng -->
+                        <div class="col-lg-5">
+                            <div class="checkout-card sticky-top" style="top: 100px;">
+                                <div class="card-body p-4">
+                                    <h3 class="checkout-title">Tóm tắt đơn hàng</h3>
+                                    
+                                    <div class="mb-4">
+                                        <div th:each="item : ${cartItems}" class="item-details d-flex align-items-center">
+                                            <img th:src="${item.product.imageUrl}" 
+                                                 class="product-image me-3" 
+                                                 th:alt="${item.product.name}"
+                                                 onerror="this.src='https://via.placeholder.com/60'">
+                                            <div class="flex-grow-1">
+                                                <h6 class="mb-0" th:text="${item.product.name}">Tên sản phẩm</h6>
+                                                <div class="d-flex justify-content-between align-items-center mt-1">
+                                                    <span class="text-muted small">
+                                                        <span th:text="${#numbers.formatDecimal(item.product.price, 0, 'COMMA', 0, 'POINT') + ' ₫'}"
+                                                        >100.000 ₫</span> x 
+                                                        <span th:text="${item.quantity}">1</span>
+                                                    </span>
+                                                    <span class="text-primary" th:text="${#numbers.formatDecimal(item.product.price * item.quantity, 0, 'COMMA', 0, 'POINT') + ' ₫'}">100.000 ₫</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="order-summary">
+                                        <div class="summary-row">
+                                            <span>Tạm tính:</span>
+                                            <span th:text="${#numbers.formatDecimal(totalAmount, 0, 'COMMA', 0, 'POINT') + ' ₫'}">300.000 ₫</span>
+                                        </div>
+                                        <div class="summary-row">
+                                            <span>Phí vận chuyển:</span>
+                                            <span>0 ₫</span>
+                                        </div>
+                                        <div class="summary-row">
+                                            <span>Tổng cộng:</span>
+                                            <span class="text-primary" th:text="${#numbers.formatDecimal(totalAmount, 0, 'COMMA', 0, 'POINT') + ' ₫'}">300.000 ₫</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer bg-transparent border-top-0 p-4">
+                                    <button type="submit" class="btn btn-primary w-100 mb-3">
+                                        <i class="bi bi-bag-check me-2"></i>Đặt hàng
+                                    </button>
+                                    <a th:href="@{/shop/cart}" class="btn btn-outline-secondary w-100">
+                                        <i class="bi bi-arrow-left me-2"></i>Quay lại giỏ hàng
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

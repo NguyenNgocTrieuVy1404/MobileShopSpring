@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{shop/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Thông tin tài khoản</title>
+</head>
+<body>
+    <div layout:fragment="main-content">
+        <div class="profile-container">
+            <div class="container">
+                <!-- Thông báo -->
+                <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="bi bi-check-circle-fill me-2"></i>
+                    <span th:text="${successMessage}">Thao tác thành công</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                
+                <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                    <span th:text="${errorMessage}">Đã xảy ra lỗi</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                
+                <!-- Phần header hồ sơ -->
+                <div class="profile-header">
+                    <img src="https://via.placeholder.com/120" alt="Avatar" class="profile-avatar">
+                    <h3 class="fw-bold mb-0" sec:authentication="name">Nguyễn Văn A</h3>
+                </div>
+
+                <div class="row">
+                    <!-- Tabs bên trái -->
+                    <div class="col-lg-3 mb-4">
+                        <div class="profile-card">
+                            <div class="card-body p-3">
+                                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                    <button class="nav-link active" id="profile-info-tab" data-bs-toggle="pill" data-bs-target="#profile-info" type="button" role="tab" aria-controls="profile-info" aria-selected="true">
+                                        <i class="bi bi-person-circle me-2"></i>Thông tin cá nhân
+                                    </button>
+                                    <button class="nav-link" id="password-tab" data-bs-toggle="pill" data-bs-target="#password" type="button" role="tab" aria-controls="password" aria-selected="false">
+                                        <i class="bi bi-shield-lock me-2"></i>Đổi mật khẩu
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Nội dung tabs bên phải -->
+                    <div class="col-lg-9">
+                        <div class="tab-content" id="v-pills-tabContent">
+                            <!-- Tab thông tin cá nhân -->
+                            <div class="tab-pane fade show active" id="profile-info" role="tabpanel" aria-labelledby="profile-info-tab">
+                                <div class="profile-card">
+                                    <div class="card-header">
+                                        <i class="bi bi-person me-2"></i>Thông tin cá nhân
+                                    </div>
+                                    <div class="card-body p-4">
+                                        <form th:action="@{/user/profile/update}" method="post" th:object="${user}">
+                                            <input type="hidden" th:field="*{id}">
+                                            
+                                            <div class="mb-3">
+                                                <label for="username" class="form-label">Tên đăng nhập</label>
+                                                <input type="text" class="form-control" id="username" th:field="*{username}" readonly>
+                                                <div class="form-text">Tên đăng nhập không thể thay đổi.</div>
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                <label for="fullName" class="form-label">Họ tên</label>
+                                                <input type="text" class="form-control" id="fullName" th:field="*{fullName}" required>
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                <label for="email" class="form-label">Email</label>
+                                                <input type="email" class="form-control" id="email" th:field="*{email}" required>
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                <label for="phoneNumber" class="form-label">Số điện thoại</label>
+                                                <input type="tel" class="form-control" id="phoneNumber" th:field="*{phoneNumber}" required>
+                                                <div class="form-text">Ví dụ: 0912345678</div>
+                                            </div>
+                                            
+                                            <div class="text-end mt-4">
+                                                <button type="submit" class="btn btn-update">
+                                                    <i class="bi bi-check2 me-2"></i>Cập nhật thông tin
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Tab đổi mật khẩu -->
+                            <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+                                <div class="profile-card">
+                                    <div class="card-header">
+                                        <i class="bi bi-shield-lock me-2"></i>Đổi mật khẩu
+                                    </div>
+                                    <div class="card-body p-4">
+                                        <div class="alert alert-info mb-4">
+                                            <i class="bi bi-info-circle me-2"></i>Mật khẩu phải có ít nhất 6 ký tự.
+                                        </div>
+                                        <form th:action="@{/user/profile/change-password}" method="post">
+                                            <div class="mb-3">
+                                                <label for="currentPassword" class="form-label">Mật khẩu hiện tại</label>
+                                                <div class="input-group">
+                                                    <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+                                                    <span class="input-group-text" onclick="togglePassword('currentPassword')">
+                                                        <i class="bi bi-eye" id="currentPasswordToggle"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                <label for="newPassword" class="form-label">Mật khẩu mới</label>
+                                                <div class="input-group">
+                                                    <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                                                    <span class="input-group-text" onclick="togglePassword('newPassword')">
+                                                        <i class="bi bi-eye" id="newPasswordToggle"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                <label for="confirmPassword" class="form-label">Xác nhận mật khẩu mới</label>
+                                                <div class="input-group">
+                                                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                                                    <span class="input-group-text" onclick="togglePassword('confirmPassword')">
+                                                        <i class="bi bi-eye" id="confirmPasswordToggle"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="text-end mt-4">
+                                                <button type="submit" class="btn btn-update">
+                                                    <i class="bi bi-lock me-2"></i>Đổi mật khẩu
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

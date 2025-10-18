@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{shop/layout}">
+<head>
+    <title>Đặt hàng thành công - Shop Online</title>
+</head>
+<body>
+    <div layout:fragment="main-content">
+        <div class="success-container">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="success-card">
+                            <i class="bi bi-check-circle-fill success-icon"></i>
+                            <h2 class="fw-bold mb-3">Đặt hàng thành công!</h2>
+                            <p class="text-muted mb-3">Cảm ơn bạn đã đặt hàng. Chúng tôi đã nhận được đơn hàng của bạn và sẽ xử lý trong thời gian sớm nhất.</p>
+                            
+                            <div class="order-number">
+                                Mã đơn hàng: <span class="order-code" th:text="${orderCode}">DH-202412-000001</span>
+                            </div>
+                            
+                            <p>Thông tin chi tiết về đơn hàng đã được gửi đến email của bạn.<br>
+                            <small class="text-muted">Vui lòng lưu lại mã đơn hàng để tra cứu khi cần thiết.</small></p>
+                            
+                            <div class="d-flex justify-content-center mt-4">
+                                <a th:href="@{/user/orders}" class="btn btn-primary continue-btn me-3" sec:authorize="isAuthenticated()">
+                                    <i class="bi bi-list-ul me-2"></i>Xem đơn hàng
+                                </a>
+                                <a th:href="@{/shop}" class="btn btn-primary continue-btn">
+                                    <i class="bi bi-cart me-2"></i>Tiếp tục mua sắm
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="steps-container">
+                            <h4 class="text-center mb-4">Các bước tiếp theo</h4>
+                            <div class="row g-4">
+                                <div class="col-md-4">
+                                    <div class="step-item">
+                                        <i class="bi bi-envelope-check step-icon"></i>
+                                        <h5 class="step-title">Xác nhận</h5>
+                                        <p class="mb-0">Bạn sẽ nhận được email xác nhận đơn hàng</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="step-item">
+                                        <i class="bi bi-box-seam step-icon"></i>
+                                        <h5 class="step-title">Đóng gói</h5>
+                                        <p class="mb-0">Đơn hàng sẽ được đóng gói cẩn thận</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="step-item">
+                                        <i class="bi bi-truck step-icon"></i>
+                                        <h5 class="step-title">Vận chuyển</h5>
+                                        <p class="mb-0">Đơn hàng sẽ được giao đến địa chỉ của bạn</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

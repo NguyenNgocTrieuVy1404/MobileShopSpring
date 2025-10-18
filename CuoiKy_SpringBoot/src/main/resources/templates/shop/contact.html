@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{shop/layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên hệ - Shop Online</title>
+</head>
+<body>
+    <div layout:fragment="main-content">
+        <!-- Page Header -->
+        <section class="bg-warning py-5" style="margin-top: 70px;">
+            <div class="container py-5">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h1 class="display-4 fw-bold text-white mb-4">Liên hệ với chúng tôi</h1>
+                        <p class="lead text-white-75 mb-5">Chúng tôi luôn sẵn sàng lắng nghe và hỗ trợ bạn. Hãy liên hệ với chúng tôi để được giải đáp mọi thắc mắc.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Info Section -->
+        <section class="py-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-8 pb-4">
+                        <div class="row mb-5">
+                            <div class="col-lg-4 mb-4">
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-warning rounded-circle p-3 me-3 text-white">
+                                        <i class="bi bi-geo-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-1 fw-bold">Địa chỉ</h5>
+                                        <p class="mb-0 text-muted">273 An Dương Vương, Phường 3, Quận 5, TP.HCM</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 mb-4">
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-warning rounded-circle p-3 me-3 text-white">
+                                        <i class="bi bi-envelope"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-1 fw-bold">Email</h5>
+                                        <p class="mb-0 text-muted">shoponline@gmail.com</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 mb-4">
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-warning rounded-circle p-3 me-3 text-white">
+                                        <i class="bi bi-telephone"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-1 fw-bold">Điện thoại</h5>
+                                        <p class="mb-0 text-muted">+84 28 3835 4409</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Form -->
+                        <div class="card border-0 shadow-sm rounded-3 p-4">
+                            <h3 class="mb-4 fw-bold">Gửi tin nhắn cho chúng tôi</h3>
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label class="form-label fw-bold" for="fname">Họ</label>
+                                            <input type="text" class="form-control border border-2" id="fname" placeholder="Nhập họ của bạn">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label class="form-label fw-bold" for="lname">Tên</label>
+                                            <input type="text" class="form-control border border-2" id="lname" placeholder="Nhập tên của bạn">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label class="form-label fw-bold" for="email">Địa chỉ email</label>
+                                    <input type="email" class="form-control border border-2" id="email" placeholder="example@email.com">
+                                </div>
+                                
+                                <div class="form-group mb-4">
+                                    <label class="form-label fw-bold" for="message">Tin nhắn</label>
+                                    <textarea class="form-control border border-2" id="message" rows="5" placeholder="Nhập nội dung tin nhắn của bạn"></textarea>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-warning text-white fw-bold py-2 px-4">Gửi tin nhắn</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map Section -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="text-center fw-bold mb-5">Vị trí của chúng tôi</h2>
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.669726256703!2d106.68006961471834!3d10.761387392332747!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1b7c3ed289%3A0xa06651894598e488!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBTw6BpIEfDsm4!5e0!3m2!1svi!2s!4v1655447902178!5m2!1svi!2s" 
+                                    class="rounded shadow-sm" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="py-5">
+            <div class="container">
+                <h2 class="text-center fw-bold mb-5">Câu hỏi thường gặp</h2>
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="accordion" id="faqAccordion">
+                            <div class="accordion-item border-0 mb-3 shadow-sm">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Làm thế nào để đặt hàng?
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Để đặt hàng, bạn chỉ cần chọn sản phẩm mình muốn mua, thêm vào giỏ hàng và tiến hành thanh toán. Bạn có thể thanh toán bằng nhiều phương thức khác nhau như thẻ tín dụng, chuyển khoản ngân hàng hoặc tiền mặt khi nhận hàng.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item border-0 mb-3 shadow-sm">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Thời gian giao hàng là bao lâu?
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Thời gian giao hàng phụ thuộc vào khu vực của bạn. Thông thường, chúng tôi giao hàng trong vòng 2-3 ngày đối với các thành phố lớn và 3-5 ngày đối với các khu vực khác.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item border-0 mb-3 shadow-sm">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        Chính sách đổi trả như thế nào?
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Chúng tôi chấp nhận đổi trả trong vòng 7 ngày kể từ ngày nhận hàng nếu sản phẩm có lỗi từ nhà sản xuất. Sản phẩm phải còn nguyên vẹn, không có dấu hiệu đã qua sử dụng và còn đầy đủ bao bì, phụ kiện.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html> 

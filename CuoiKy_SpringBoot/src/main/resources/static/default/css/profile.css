@@ -1,0 +1,88 @@
+/* CSS cho trang Profile */
+.profile-container {
+    padding-top: 6rem;
+    padding-bottom: 4rem;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    position: relative;
+}
+
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+    object-fit: cover;
+}
+
+.profile-card {
+    border-radius: 12px;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
+    border: none;
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+.profile-card .card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+}
+
+.nav-pills .nav-link {
+    color: #495057;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.2s;
+}
+
+.nav-pills .nav-link:hover {
+    background-color: #f8f9fa;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #0d6efd;
+    color: white;
+}
+
+.tab-content {
+    padding: 1rem 0;
+}
+
+.form-control {
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    border-color: #86b7fe;
+}
+
+.btn-update {
+    background-color: #0d6efd;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-update:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.input-group-text {
+    background-color: white;
+    border-left: none;
+    cursor: pointer;
+} 

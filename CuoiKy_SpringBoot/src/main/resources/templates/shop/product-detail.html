@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{shop/layout}">
+<head>
+    <title>Chi tiết sản phẩm - Shop Online</title>
+</head>
+<body>
+    <div layout:fragment="main-content">
+        <div class="product-detail-container">
+            <div class="container">
+                <!-- Breadcrumb -->
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a th:href="@{/shop}">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a th:href="@{/shop/products}">Sản phẩm</a></li>
+                        <li class="breadcrumb-item active" aria-current="page" th:text="${product.name}">Tên sản phẩm</li>
+                    </ol>
+                </nav>
+
+                <!-- Product Detail -->
+                <div class="card card-product-detail mb-5">
+                    <div class="row g-0">
+                        <!-- Product Image -->
+                        <div class="col-md-6">
+                            <div class="detail-image-container">
+                                <img th:src="${product.imageUrl}" 
+                                     class="detail-image" 
+                                     alt="Product Image" 
+                                     onerror="this.src='https://via.placeholder.com/600'">
+                            </div>
+                        </div>
+
+                        <!-- Product Info -->
+                        <div class="col-md-6">
+                            <div class="card-body p-5">
+                                <div class="mb-3">
+                                    <span class="badge bg-primary category-badge" th:text="${product.category}">Danh mục</span>
+                                </div>
+                                <h2 class="product-title mb-3" th:text="${product.name}">Tên sản phẩm</h2>
+                                <h3 class="product-price mb-4" 
+                                    th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT') + ' ₫'}">
+                                    Giá
+                                </h3>
+
+                                <!-- Stock Status -->
+                                <div class="mb-4">
+                                    <div th:if="${product.stockQuantity > 0}" class="badge bg-success stock-badge">
+                                        <i class="bi bi-check-circle-fill me-1"></i>
+                                        <span th:text="'Còn hàng (' + ${product.stockQuantity} + ' sản phẩm)'"></span>
+                                    </div>
+                                    <div th:unless="${product.stockQuantity > 0}" class="badge bg-danger stock-badge">
+                                        <i class="bi bi-x-circle-fill me-1"></i> Hết hàng
+                                    </div>
+                                </div>
+
+                                <!-- Add to Cart Section -->
+                                <div class="mb-4 p-3 bg-light rounded">
+                                    <form th:action="@{/shop/cart/add}" method="POST" id="addToCartForm" onsubmit="return validateQuantity()">
+                                        <input type="hidden" name="productId" th:value="${product.id}">
+                                        <!-- Thêm info về số lượng trong giỏ hàng hiện tại nếu có -->
+                                        <input type="hidden" id="currentCartQuantity" th:value="${cartQuantity != null ? cartQuantity : 0}">
+                                        
+                                        <div class="row align-items-center g-3">
+                                            <div class="col-lg-4 col-md-5">
+                                                <label for="quantity" class="form-label small mb-1 fw-bold">Số lượng:</label>
+                                                <div class="d-flex flex-column">
+                                                    <div class="quantity-input-group">
+                                                        <button type="button" class="btn" id="decreaseBtn">
+                                                            <i class="bi bi-dash"></i>
+                                                        </button>
+                                                        <input type="text" 
+                                                               class="quantity-input"
+                                                               id="quantity"
+                                                               name="quantity"
+                                                               th:data-stock="${product.stockQuantity}"
+                                                               value="1"
+                                                               readonly
+                                                               aria-label="Số lượng sản phẩm"
+                                                               aria-describedby="quantityError">
+                                                        <button type="button" class="btn" id="increaseBtn">
+                                                            <i class="bi bi-plus"></i>
+                                                        </button>
+                                                    </div>
+                                                    <small id="quantityError" class="text-danger quantity-error">
+                                                        Vượt quá số lượng tồn kho
+                                                    </small>
+                                                    <!-- Hiển thị thông tin số lượng trong giỏ hàng hiện tại nếu có -->
+                                                    <small th:if="${cartQuantity != null && cartQuantity > 0}" class="text-info mt-1">
+                                                        <i class="bi bi-info-circle"></i> 
+                                                        Đã có <span th:text="${cartQuantity}">0</span> sản phẩm trong giỏ hàng
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8 col-md-7">
+                                                <button type="submit" class="btn btn-primary w-100" id="addToCartBtn"
+                                                        th:disabled="${product.stockQuantity <= 0}">
+                                                    <i class="bi bi-cart-plus me-2"></i> Thêm vào giỏ hàng
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <!-- Product Description -->
+                                <div class="mb-4">
+                                    <h4 class="description-title">Mô tả sản phẩm</h4>
+                                    <p class="card-text" th:text="${product.description}">Mô tả chi tiết sản phẩm</p>
+                                </div>
+
+                                <!-- Additional Features -->
+                                <div class="row g-3 mt-4">
+                                    <div class="col-md-4">
+                                        <div class="feature-item">
+                                            <div class="text-center">
+                                                <i class="bi bi-truck feature-icon"></i>
+                                                <p class="feature-text mb-0">Giao hàng miễn phí</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="feature-item">
+                                            <div class="text-center">
+                                                <i class="bi bi-shield-check feature-icon"></i>
+                                                <p class="feature-text mb-0">Bảo hành 12 tháng</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="feature-item">
+                                            <div class="text-center">
+                                                <i class="bi bi-arrow-counterclockwise feature-icon"></i>
+                                                <p class="feature-text mb-0">Đổi trả trong 7 ngày</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

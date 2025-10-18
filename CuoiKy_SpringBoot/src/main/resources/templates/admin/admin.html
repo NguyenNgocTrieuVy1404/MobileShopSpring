@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{admin/layout}">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Admin Management</title>
+</head>
+
+<body id="page-top">
+    <div layout:fragment="main-content">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Tổng quan</h1>
+            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                <i class="fas fa-download fa-sm text-white-50"></i> Xuất báo cáo
+            </a>
+        </div>
+
+        <!-- Content Row - Thẻ tóm tắt -->
+        <div class="row">
+            <!-- Doanh thu tháng Card -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                    Doanh thu (Tháng)
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">40.000.000 ₫</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Doanh thu năm Card -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                    Doanh thu (Năm)
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">215.000.000 ₫</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Đơn đang xử lý Card -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-info shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                    Đơn hàng cần xử lý
+                                </div>
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col-auto">
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">18</div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="progress progress-sm mr-2">
+                                            <div class="progress-bar bg-info" role="progressbar" style="width: 50%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sản phẩm Card -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-warning shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                    Tổng sản phẩm
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">56</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-box fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Row - Biểu đồ -->
+        <div class="row">
+            <!-- Biểu đồ doanh thu -->
+            <div class="col-xl-8 col-lg-7">
+                <div class="card shadow mb-4">
+                    <!-- Card Header -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Doanh thu theo tháng</h6>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="chart-area">
+                            <canvas id="myAreaChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Biểu đồ tròn -->
+            <div class="col-xl-4 col-lg-5">
+                <div class="card shadow mb-4">
+                    <!-- Card Header -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Thống kê sản phẩm theo danh mục</h6>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <div class="chart-pie pt-4 pb-2">
+                            <canvas id="myPieChart"></canvas>
+                        </div>
+                        <div class="mt-4 text-center small">
+                            <span class="mr-2">
+                                <i class="fas fa-circle text-primary"></i> Điện thoại
+                            </span>
+                            <span class="mr-2">
+                                <i class="fas fa-circle text-success"></i> Laptop
+                            </span>
+                            <span class="mr-2">
+                                <i class="fas fa-circle text-info"></i> Tablet
+                            </span>
+                            <span class="mr-2">
+                                <i class="fas fa-circle text-warning"></i> Phụ kiện
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Row - Các thẻ thông tin -->
+        <div class="row">
+            <!-- Thẻ trái -->
+            <div class="col-lg-6 mb-4">
+                <!-- Project Card -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Tình trạng kho hàng</h6>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="small font-weight-bold">Điện thoại <span class="float-right">80%</span></h4>
+                        <div class="progress mb-4">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 80%"></div>
+                        </div>
+                        <h4 class="small font-weight-bold">Laptop <span class="float-right">60%</span></h4>
+                        <div class="progress mb-4">
+                            <div class="progress-bar" role="progressbar" style="width: 60%"></div>
+                        </div>
+                        <h4 class="small font-weight-bold">Tablet <span class="float-right">40%</span></h4>
+                        <div class="progress mb-4">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"></div>
+                        </div>
+                        <h4 class="small font-weight-bold">Phụ kiện <span class="float-right">90%</span></h4>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 90%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thẻ phải -->
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Đơn hàng mới nhất</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Mã đơn</th>
+                                        <th>Khách hàng</th>
+                                        <th>Ngày đặt</th>
+                                        <th>Tổng tiền</th>
+                                        <th>Trạng thái</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>#ORD001</td>
+                                        <td>Nguyễn Văn A</td>
+                                        <td>05/03/2024</td>
+                                        <td>5.800.000 ₫</td>
+                                        <td><span class="badge badge-warning">Đang xử lý</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#ORD002</td>
+                                        <td>Trần Thị B</td>
+                                        <td>04/03/2024</td>
+                                        <td>12.500.000 ₫</td>
+                                        <td><span class="badge badge-info">Đang giao</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#ORD003</td>
+                                        <td>Lê Văn C</td>
+                                        <td>03/03/2024</td>
+                                        <td>8.200.000 ₫</td>
+                                        <td><span class="badge badge-success">Hoàn thành</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="text-center mt-3">
+                            <a th:href="@{/access-denied}" class="btn btn-sm btn-primary">
+                                Xem tất cả đơn hàng
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

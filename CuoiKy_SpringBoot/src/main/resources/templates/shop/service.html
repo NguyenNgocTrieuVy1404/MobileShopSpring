@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{shop/layout}">
+<head>
+    <title>Service - Shop Online</title>
+</head>
+<body>
+    <div layout:fragment="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section bg-warning py-5">
+            <div class="container py-5">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <h1 class="display-4 fw-bold text-white mb-4">Chào mừng đến với<br>Shop Online</h1>
+                        <p class="lead text-white-75 mb-5">Khám phá các sản phẩm công nghệ chất lượng cao với giá cả hợp lý. Chúng tôi cam kết mang đến cho bạn những trải nghiệm mua sắm tốt nhất.</p>
+                        <div class="d-flex gap-3">
+                            <a th:href="@{/shop/products}" class="btn btn-teal">Xem sản phẩm</a>
+                            <a th:href="@{/shop/about}" class="btn btn-outline-yellow">Về chúng tôi</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" style="position: relative;">
+                        <img th:src="@{/images/pets/bulldog.png}" class="img-fluid" alt="French Bulldog" style="max-width: 100%; height: auto;">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <div class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <i class="bi bi-people"></i>
+                        <div class="stat-number">+10,000</div>
+                        <div class="stat-label">Khách hàng hài lòng</div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="bi bi-box-seam"></i>
+                        <div class="stat-number">+5,000</div>
+                        <div class="stat-label">Sản phẩm đa dạng</div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="bi bi-truck"></i>
+                        <div class="stat-number">+100</div>
+                        <div class="stat-label">Đơn hàng mỗi ngày</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team Section -->
+        <section class="py-5 mt-5">
+            <div class="container py-5">
+                <h2 class="display-5 text-center fw-bold mb-5">Our Team</h2>
+                <div class="row text-center">
+                    <!-- Team Member 1 -->
+                    <div class="col-md-3 col-lg-1-5 mb-4">
+                        <div class="card border-0" style="box-shadow: none; background-color: transparent;">
+                            <img th:src="@{/images/team/huyne.jpg}" class="card-img-top" alt="Lục Quang Huy" style="height: 300px; object-fit: contain; padding: 15px;">
+                            <div class="card-body py-4">
+                                <h5 class="card-title mb-1">Lục Quang Huy</h5>
+                                <p class="text-muted small mb-3">DEVELOPER</p>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a href="#" class="rounded-circle bg-warning p-2 text-decoration-none" style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center;">
+                                        <i class="fab fa-instagram text-white"></i>
+                                    </a>
+                                    <a href="#" class="rounded-circle bg-warning p-2 text-decoration-none" style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center;">
+                                        <i class="fab fa-facebook-f text-white"></i>
+                                    </a>
+                                    <a href="#" class="rounded-circle bg-warning p-2 text-decoration-none" style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center;">
+                                        <i class="fab fa-twitter text-white"></i>
+                                    </a>
+                                    <a href="#" class="rounded-circle bg-warning p-2 text-decoration-none" style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center;">
+                                        <i class="fab fa-github text-white"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Team Member 2 -->
+                    <div class="col-md-3 col-lg-1-5 mb-4">
+                        <div class="card border-0" style="box-shadow: none; background-color: transparent;">
+                            <img th:src="@{/images/team/phongne.jpg}" class="card-img-top" alt="Phạm Thanh Phong" style="height: 300px; object-fit: contain; padding: 15px;">
+                            <div class="card-body py-4">
+                                <h5 class="card-title mb-1">Phạm Thanh Phong</h5>
+                                <p class="text-muted small mb-3">DEVELOPER</p>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a href="#" class="rounded-circle bg-warning p-2 text-decoration-none" style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center;">
+                                        <i class="fab fa-instagram text-white"></i>
+                                    </a>
+                                    <a href="#" class="rounded-circle bg-warning p-2 text-decoration-none" style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center;">
+                                        <i class="fab fa-facebook-f text-white"></i>
+                                    </a>
+                                    <a href="#" class="rounded-circle bg-warning p-2 text-decoration-none" style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center;">
+                                        <i class="fab fa-twitter text-white"></i>
+                                    </a>
+                                    <a href="#" class="rounded-circle bg-warning p-2 text-decoration-none" style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center;">
+                                        <i class="fab fa-github text-white"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Team Member 3 -->
+                    <div class="col-md-3 col-lg-1-5 mb-4">
+                        <div class="card border-0" style="box-shadow: none; background-color: transparent;">
+                            <img th:src="@{/images/team/vyne.jpg}" class="card-img-top" alt="Nguyễn Ngọc Triều Vỹ" style="height: 300px; object-fit: contain; padding: 15px;">
+                            <div class="card-body py-4">
+                                <h5 class="card-title mb-1">Nguyễn Ngọc Triều Vỹ</h5>
+                                <p class="text-muted small mb-3">DEVELOPER</p>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a href="#" class="rounded-circle bg-warning p-2 text-decoration-none" style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center;">
+                                        <i class="fab fa-instagram text-white"></i>
+                                    </a>
+                                    <a href="#" class="rounded-circle bg-warning p-2 text-decoration-none" style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center;">
+                                        <i class="fab fa-facebook-f text-white"></i>
+                                    </a>
+                                    <a href="#" class="rounded-circle bg-warning p-2 text-decoration-none" style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center;">
+                                        <i class="fab fa-twitter text-white"></i>
+                                    </a>
+                                    <a href="#" class="rounded-circle bg-warning p-2 text-decoration-none" style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center;">
+                                        <i class="fab fa-github text-white"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Team Member 4 -->
+                    <div class="col-md-3 col-lg-1-5 mb-4">
+                        <div class="card border-0" style="box-shadow: none; background-color: transparent;">
+                            <img th:src="@{/images/team/thaine.jpg}" class="card-img-top" alt="Lê Vĩnh Thái" style="height: 300px; object-fit: contain; padding: 15px;">
+                            <div class="card-body py-4">
+                                <h5 class="card-title mb-1">Lê Vĩnh Thái</h5>
+                                <p class="text-muted small mb-3">DEVELOPER</p>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a href="#" class="rounded-circle bg-warning p-2 text-decoration-none" style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center;">
+                                        <i class="fab fa-instagram text-white"></i>
+                                    </a>
+                                    <a href="#" class="rounded-circle bg-warning p-2 text-decoration-none" style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center;">
+                                        <i class="fab fa-facebook-f text-white"></i>
+                                    </a>
+                                    <a href="#" class="rounded-circle bg-warning p-2 text-decoration-none" style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center;">
+                                        <i class="fab fa-twitter text-white"></i>
+                                    </a>
+                                    <a href="#" class="rounded-circle bg-warning p-2 text-decoration-none" style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center;">
+                                        <i class="fab fa-github text-white"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Team Member 5 -->
+                    <div class="col-md-3 col-lg-1-5 mb-4">
+                        <div class="card border-0" style="box-shadow: none; background-color: transparent;">
+                            <img th:src="@{/images/team/duykhuong.jpg}" class="card-img-top" alt="Duy Khương" style="height: 300px; object-fit: contain; padding: 15px;">
+                            <div class="card-body py-4">
+                                <h5 class="card-title mb-1">Duy Khương</h5>
+                                <p class="text-muted small mb-3">DEVELOPER</p>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a href="#" class="rounded-circle bg-warning p-2 text-decoration-none" style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center;">
+                                        <i class="fab fa-instagram text-white"></i>
+                                    </a>
+                                    <a href="#" class="rounded-circle bg-warning p-2 text-decoration-none" style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center;">
+                                        <i class="fab fa-facebook-f text-white"></i>
+                                    </a>
+                                    <a href="#" class="rounded-circle bg-warning p-2 text-decoration-none" style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center;">
+                                        <i class="fab fa-twitter text-white"></i>
+                                    </a>
+                                    <a href="#" class="rounded-circle bg-warning p-2 text-decoration-none" style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center;">
+                                        <i class="fab fa-github text-white"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Phone Services Section -->
+        <section class="bg-warning py-5 my-5">
+            <div class="container text-center py-4">
+                <h2 class="display-6 text-white mb-5">Dịch vụ sửa chữa và bảo hành điện thoại chính hãng</h2>
+                
+                <div class="row justify-content-center g-4 mt-3">
+                    <!-- Service 1 -->
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow">
+                            <div class="p-3 bg-light">
+                                <img src="/images/products/iphone14.jpg" class="img-fluid" alt="iPhone 14" style="height: 250px; object-fit: contain;">
+                            </div>
+                            <div class="card-body text-center py-4">
+                                <h3 class="fs-4">Sửa chữa iPhone</h3>
+                                <p class="text-muted">Dịch vụ sửa chữa và thay thế linh kiện iPhone chính hãng</p>
+                                <div class="mb-3">
+                                    <span class="text-decoration-line-through fs-5 me-2">$50</span>
+                                    <span class="fs-3 fw-bold text-warning">$30</span>
+                                </div>
+                                <a href="#" class="btn btn-teal btn-lg px-4 rounded-pill">Đặt lịch</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 2 -->
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow">
+                            <div class="p-3 bg-light">
+                                <img src="/images/products/samsung-s23.jpg" class="img-fluid" alt="Samsung S23" style="height: 250px; object-fit: contain;">
+                            </div>
+                            <div class="card-body text-center py-4">
+                                <h3 class="fs-4">Sửa chữa Samsung</h3>
+                                <p class="text-muted">Dịch vụ sửa chữa điện thoại Samsung Galaxy chính hãng</p>
+                                <div class="mb-3">
+                                    <span class="text-decoration-line-through fs-5 me-2">$40</span>
+                                    <span class="fs-3 fw-bold text-warning">$25</span>
+                                </div>
+                                <a href="#" class="btn btn-teal btn-lg px-4 rounded-pill">Đặt lịch</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Service 3 -->
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow">
+                            <div class="p-3 bg-light">
+                                <img src="/images/products/xiaomi-13.jpg" class="img-fluid" alt="Xiaomi 13" style="height: 250px; object-fit: contain;">
+                            </div>
+                            <div class="card-body text-center py-4">
+                                <h3 class="fs-4">Sửa chữa Xiaomi</h3>
+                                <p class="text-muted">Dịch vụ sửa chữa và thay thế linh kiện Xiaomi chính hãng</p>
+                                <div class="mb-3">
+                                    <span class="text-decoration-line-through fs-5 me-2">$45</span>
+                                    <span class="fs-3 fw-bold text-warning">$20</span>
+                                </div>
+                                <a href="#" class="btn btn-teal btn-lg px-4 rounded-pill">Đặt lịch</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Posts Section -->
+        <section class="py-5">
+            <div class="container py-5">
+                <h2 class="text-center display-5 fw-bold mb-3">Recent Posts</h2>
+                <p class="text-center text-muted mb-5">Lorem Ipsum available, but the majority have suffered alteration in some form.</p>
+                
+                <div class="row">
+                    <!-- Post 1 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card border-0 shadow-lg h-100">
+                            <img src="/images/products/iphone14.jpg" class="card-img-top" alt="iPhone 14" style="height: 250px; object-fit: contain; padding: 15px;">
+                            <div class="card-body p-4">
+                                <h5 class="card-title mb-3">iPhone 14: Our Latest Tech Review</h5>
+                                <p class="text-muted mb-4">Explore our detailed review of the iPhone 14, featuring its powerful performance and impressive camera system.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-warning">MARCH 15, 2023</small>
+                                    <a href="#" class="text-teal text-decoration-none">Read More+</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Post 2 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card border-0 shadow-lg h-100">
+                            <img src="/images/products/macbook-m2.jpg" class="card-img-top" alt="MacBook M2" style="height: 250px; object-fit: contain; padding: 15px;">
+                            <div class="card-body p-4">
+                                <h5 class="card-title mb-3">MacBook M2: Power and Performance</h5>
+                                <p class="text-muted mb-4">Discover why the MacBook M2 is revolutionizing the way professionals work with its incredible speed and efficiency.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-warning">MARCH 10, 2023</small>
+                                    <a href="#" class="text-teal text-decoration-none">Read More+</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Post 3 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card border-0 shadow-lg h-100">
+                            <img src="/images/products/airpods.jpg" class="card-img-top" alt="AirPods" style="height: 250px; object-fit: contain; padding: 15px;">
+                            <div class="card-body p-4">
+                                <h5 class="card-title mb-3">AirPods: The Ultimate Sound Experience</h5>
+                                <p class="text-muted mb-4">Find out why Apple's AirPods continue to be the top choice for wireless earbuds in our comprehensive analysis.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-warning">MARCH 05, 2023</small>
+                                    <a href="#" class="text-teal text-decoration-none">Read More+</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,298 @@
+/* CSS cho trang add-product & update-product */
+.form-container {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.page-title {
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-weight: 600;
+    padding-bottom: 10px;
+}
+
+/* Màu khác nhau cho update và add */
+.page-title.add-product {
+    border-bottom: 2px solid #3498db;
+}
+
+.page-title.update-product {
+    border-bottom: 2px solid #f39c12;
+}
+
+.form-label {
+    font-weight: 500;
+    color: #34495e;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 0.875rem;
+    margin-top: 5px;
+}
+
+/* Màu focus khác nhau cho update và add */
+.add-product .form-control:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+}
+
+.update-product .form-control:focus {
+    border-color: #f39c12;
+    box-shadow: 0 0 0 0.2rem rgba(243, 156, 18, 0.25);
+}
+
+.btn-submit {
+    padding: 10px 30px;
+    font-weight: 500;
+}
+
+.image-preview {
+    max-width: 200px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* CSS cho danh sách sản phẩm */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.table th {
+    background-color: #f8f9fc;
+    border-bottom: 2px solid #e3e6f0;
+    color: #4e73df;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+}
+
+/* Header màu đen chữ trắng */
+.table-dark th {
+    background-color: #212529;
+    color: #ffffff;
+    border-color: #32383e;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.table-img {
+    max-width: 50px;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+}
+
+/* Card styles */
+.card {
+    margin-bottom: 2rem;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+}
+
+.card-header {
+    background-color: #f8f9fc;
+    border-bottom: 1px solid #e3e6f0;
+    padding: 1rem;
+}
+
+.card-header h6 {
+    margin: 0;
+    color: #4e73df;
+    font-weight: 700;
+}
+
+.card-body {
+    padding: 1.25rem;
+}
+
+/* Button styles */
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+}
+
+.btn-warning {
+    color: #fff;
+    background-color: #f6c23e;
+    border-color: #f6c23e;
+}
+
+.btn-warning:hover {
+    color: #fff;
+    background-color: #f4b619;
+    border-color: #f4b619;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #e74a3b;
+    border-color: #e74a3b;
+}
+
+.btn-danger:hover {
+    color: #fff;
+    background-color: #e02d1b;
+    border-color: #d62516;
+}
+
+/* Topbar styles */
+.topbar {
+    height: 4.375rem;
+    position: relative;
+    z-index: 2;
+}
+
+.topbar .navbar-nav .nav-item {
+    position: relative;
+}
+
+.topbar .nav-link {
+    position: relative;
+    height: 4.375rem;
+    display: flex;
+    align-items: center;
+    padding: 0 0.75rem;
+    color: #858796;
+}
+
+.topbar .nav-link:hover {
+    color: #4e73df;
+    transition: all 0.2s ease-in-out;
+}
+
+.topbar .nav-link .badge-counter {
+    position: absolute;
+    transform: scale(0.7);
+    transform-origin: top right;
+    right: 0.25rem;
+    margin-top: -0.25rem;
+}
+
+.topbar.navbar-light .navbar-nav .nav-item .nav-link {
+    color: #d1d3e2;
+}
+
+.topbar.navbar-light .navbar-nav .nav-item .nav-link:hover {
+    color: #4e73df;
+}
+
+.topbar .dropdown-menu {
+    border: none;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    padding: 0.5rem 0;
+    min-width: 12rem;
+}
+
+.topbar .dropdown-item {
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    font-size: 0.85rem;
+    color: #3a3b45;
+}
+
+.topbar .dropdown-item:hover {
+    background-color: #f8f9fc;
+    color: #4e73df;
+}
+
+.topbar .dropdown-item i {
+    margin-right: 0.5rem;
+}
+
+/* Nút đăng xuất màu đỏ */
+.topbar .dropdown-item.logout-btn,
+.topbar .dropdown-menu button.dropdown-item {
+    color: #e74a3b;
+    font-weight: 500;
+    border-top: 1px solid #e3e6f0;
+    margin-top: 0.25rem;
+    padding-top: 0.75rem;
+}
+
+.topbar .dropdown-item.logout-btn:hover,
+.topbar .dropdown-menu button.dropdown-item:hover {
+    background-color: #fcf0f0;
+    color: #e02d1b;
+}
+
+.topbar .dropdown-item.logout-btn i,
+.topbar .dropdown-menu button.dropdown-item i {
+    color: #e74a3b;
+}
+
+/* User info styles */
+.topbar .user-info {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+}
+
+.topbar .user-name {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    color: #5a5c69;
+    font-size: 0.85rem;
+}
+
+.topbar .user-info .badge {
+    margin-left: 0.5rem;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.topbar .user-info i.fa-user-circle {
+    font-size: 1.5rem;
+    margin-left: 0.5rem;
+    color: #4e73df;
+}
+
+/* Đảm bảo dropdown menu hiển thị đúng */
+.dropdown-menu.show {
+    display: block !important;
+}
+
+/* Divider styles */
+.topbar-divider {
+    width: 0;
+    border-right: 1px solid #e3e6f0;
+    height: 2rem;
+    margin: auto 1rem;
+}
+
+/* View Shop button styles */
+.topbar .view-shop-btn {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    color: #4e73df;
+    font-weight: 500;
+}
+
+.topbar .view-shop-btn i {
+    margin-right: 0.5rem;
+}
+
+.topbar .view-shop-btn:hover {
+    color: #2e59d9;
+    text-decoration: none;
+}

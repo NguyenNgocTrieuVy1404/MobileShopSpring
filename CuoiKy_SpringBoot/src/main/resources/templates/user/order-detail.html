@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{shop/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Chi tiết đơn hàng #<span th:text="${order.id}">123</span></title>
+</head>
+<body>
+    <div layout:fragment="main-content">
+        <div class="order-detail-container">
+            <div class="container">
+                <!-- Phần header -->
+                <div class="detail-header text-center mb-4">
+                    <i class="bi bi-receipt fs-1 mb-3"></i>
+                    <h2 class="fw-bold mb-2">Chi tiết đơn hàng</h2>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <span class="badge bg-light text-dark fs-6 px-4 py-2 rounded-pill">
+                            <span class="text-primary fw-bold" th:text="${'DH-' + #temporals.format(order.orderDate, 'yyyyMM') + '-' + #strings.substring('000000' + order.id, #strings.length('000000' + order.id) - 6)}">DH-202312-000001</span>
+                        </span>
+                    </div>
+                    <p class="mb-0 mt-2" th:text="${#temporals.format(order.orderDate, 'dd/MM/yyyy HH:mm')}">01/01/2023 15:30</p>
+                </div>
+                
+                <div class="row">
+                    <!-- Thông tin đơn hàng -->
+                    <div class="col-lg-8">
+                        <!-- Trạng thái đơn hàng -->
+                        <div class="card mb-4">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div>Trạng thái đơn hàng</div>
+                                <span class="badge order-badge" th:classappend="'status-' + ${order.status}" th:text="${order.status == 'PENDING' ? 'Đang xử lý' : (order.status == 'PROCESSING' ? 'Đang chuẩn bị' : (order.status == 'SHIPPING' ? 'Đang giao hàng' : (order.status == 'COMPLETED' ? 'Hoàn thành' : 'Đã hủy')))}">Đang xử lý</span>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="timeline">
+                                    <div class="timeline-item" th:if="${order.status != 'CANCELLED'}">
+                                        <div class="timeline-icon"></div>
+                                        <div class="timeline-content">
+                                            <div class="timeline-date">Đơn hàng đã được xác nhận</div>
+                                            <div class="timeline-text">Đơn hàng của bạn đã được xác nhận và đang chờ xử lý</div>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item" th:if="${order.status == 'PROCESSING' || order.status == 'SHIPPING' || order.status == 'COMPLETED'}">
+                                        <div class="timeline-icon"></div>
+                                        <div class="timeline-content">
+                                            <div class="timeline-date">Đang chuẩn bị hàng</div>
+                                            <div class="timeline-text">Đơn hàng của bạn đang được chuẩn bị</div>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item" th:if="${order.status == 'SHIPPING' || order.status == 'COMPLETED'}">
+                                        <div class="timeline-icon"></div>
+                                        <div class="timeline-content">
+                                            <div class="timeline-date">Đang giao hàng</div>
+                                            <div class="timeline-text">Đơn hàng của bạn đang được giao đến địa chỉ nhận hàng</div>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item" th:if="${order.status == 'COMPLETED'}">
+                                        <div class="timeline-icon"></div>
+                                        <div class="timeline-content">
+                                            <div class="timeline-date">Đã giao hàng</div>
+                                            <div class="timeline-text">Đơn hàng của bạn đã được giao thành công</div>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item" th:if="${order.status == 'CANCELLED'}">
+                                        <div class="timeline-icon"></div>
+                                        <div class="timeline-content">
+                                            <div class="timeline-date">Đã hủy</div>
+                                            <div class="timeline-text">Đơn hàng của bạn đã bị hủy</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Danh sách sản phẩm -->
+                        <div class="card">
+                            <div class="card-header">Sản phẩm đã đặt</div>
+                            <div class="card-body p-4">
+                                <div th:each="item, iter : ${order.orderItems}" class="d-flex align-items-center mb-3" th:classappend="${!iter.last ? 'mb-3' : ''}">
+                                    <img th:if="${item.product.imageUrl != null}" th:src="${item.product.imageUrl}" class="item-image me-3" alt="Product Image">
+                                    <img th:if="${item.product.imageUrl == null}" src="https://via.placeholder.com/60" class="item-image me-3" alt="Product Image">
+                                    <div class="flex-grow-1">
+                                        <div class="product-name" th:text="${item.product.name}">iPhone 14</div>
+                                        <div class="d-flex justify-content-between align-items-center mt-1">
+                                            <div class="text-muted">
+                                                Số lượng: <span th:text="${item.quantity}">1</span>
+                                            </div>
+                                            <div class="product-price" th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT') + ' ₫/sp'}">20.000.000 ₫/sp</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Thông tin thanh toán và khách hàng -->
+                    <div class="col-lg-4">
+                        <div class="card mb-4">
+                            <div class="card-header">Thông tin người nhận</div>
+                            <div class="card-body p-4">
+                                <div class="info-group">
+                                    <div class="info-label">Họ tên</div>
+                                    <div class="info-value" th:text="${order.customerName}">Nguyễn Văn A</div>
+                                </div>
+                                <div class="info-group">
+                                    <div class="info-label">Email</div>
+                                    <div class="info-value" th:text="${order.customerEmail}">example@email.com</div>
+                                </div>
+                                <div class="info-group mb-0">
+                                    <div class="info-label">Địa chỉ giao hàng</div>
+                                    <div class="info-value" th:text="${order.shippingAddress}">123 ABC Street, District 1, HCMC</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card mb-4">
+                            <div class="card-header">Tổng thanh toán</div>
+                            <div class="card-body p-4">
+                                <div class="total-section">
+                                    <div class="total-row">
+                                        <div class="total-label">Tạm tính</div>
+                                        <div class="total-value" th:text="${#numbers.formatDecimal(order.totalAmount, 0, 'COMMA', 0, 'POINT') + ' ₫'}">500.000 ₫</div>
+                                    </div>
+                                    <div class="total-row">
+                                        <div class="total-label">Phí vận chuyển</div>
+                                        <div class="total-value">Miễn phí</div>
+                                    </div>
+                                    <div class="total-row">
+                                        <div class="total-label">Giảm giá</div>
+                                        <div class="total-value">0 ₫</div>
+                                    </div>
+                                    <div class="total-row">
+                                        <div class="total-label fw-bold">Tổng cộng</div>
+                                        <div class="grand-total" th:text="${#numbers.formatDecimal(order.totalAmount, 0, 'COMMA', 0, 'POINT') + ' ₫'}">500.000 ₫</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center">
+                            <a th:href="@{/user/orders}" class="btn btn-back">
+                                <i class="bi bi-arrow-left me-1"></i> Quay lại lịch sử đơn hàng
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
